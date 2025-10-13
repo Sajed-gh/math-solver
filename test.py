@@ -40,10 +40,12 @@ for item in result.plan:
     
 # 4. Step-by-step calculation
 print("\n4. Step-by-step Calculation:")
-for step in result.calculation_steps:
+for step in result.steps:
     print(f"  [{step.step_number}]: {step.explanation} -> {step.expression}")
+    print(f"  [{step.step_number}]: {step.latex_explanation} -> {step.latex_expression}")
 
 # 5. Final Answer
 print("\n5. Final Answer:")
 print(f"  {result.final_answer}")
+print(f"  {result.latex_final_answer}")
 print("="*25)

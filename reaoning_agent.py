@@ -14,14 +14,36 @@ llm = ChatGoogleGenerativeAI(
 ).with_structured_output(MathReasoningOutput)
 
 # Example math problem
-math_problem = "Differentiate x**2 * sin(x)"
+math_problem = "If the expression $\\frac{8-i}{3-2i}$ is rewritten in the form $a+bi$, where $a$ and $b$ are real numbers, what is the value of $a$?"
 
 # Get structured reasoning
 result: MathReasoningOutput = llm.invoke(math_problem)
 
-# Print structured output
-print("=== Structured Reasoning ===")
-print(result)
+# --- Print Structured Output ---
+print("\n" + "="*25)
+print("=== STRUCTURED REASONING RESULT ===")
+print("="*25)
 
-# Access individual parts
-print("\nFinal Answer:", result.final_answer)
+# 1. Givens
+print("\n1. Givens:")
+for given in result.givens:
+    print(f"  - {given}")
+
+# 2. Requested
+print("\n2. Requested:")
+print(f"  - {result.requested}")
+
+# 3. Plan
+print("\n3. Plan:")
+for item in result.plan:
+    print(f"  - {item}")
+    
+# 4. Step-by-step calculation
+print("\n4. Step-by-step Calculation:")
+for step in result.steps:
+    print(f"  [{step.step_number}]: {step.explanation} -> {step.expression}")
+
+# 5. Final Answer
+print("\n5. Final Answer:")
+print(f"  {result.final_answer}")
+print("="*25)
