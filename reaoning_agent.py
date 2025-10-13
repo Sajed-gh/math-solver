@@ -1,61 +1,27 @@
-import os 
+import os
 from dotenv import load_dotenv
-from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
-from tools.sympy_tool import symbolic_solver
-
+from schema import MathReasoningOutput
 
 load_dotenv()
 api_key = os.environ["GOOGLE_API_KEY"]
 
-
+# Initialize Gemini with structured output
 llm = ChatGoogleGenerativeAI(
     model='gemini-2.5-flash',
-    temperature = 0.2,
+    temperature=0,
     api_key=api_key
-)
+).with_structured_output(MathReasoningOutput)
 
-prompt_template = """
-    You are a math assistant. 
-    You will solve the problem step by step like an engineering student.
-    Problem: {problem}
+# Example math problem
+math_problem = "Differentiate x**2 * sin(x)"
 
-    Instructions:
-    1. Identify what type of equation this is.
-    3. Return your reasoning and the solution.
-"""
+# Get structured reasoning
+result: MathReasoningOutput = llm.invoke(math_problem)
 
-prompt = PromptTemplate(
-    input_variables=["problem"],
-    template=prompt_template
-)
+# Print structured output
+print("=== Structured Reasoning ===")
+print(result)
 
-
-tools = [symbolic_solver]
-
-llm = llm.bind_tools(tools)
-
-
-
-chain = prompt | llm
-
-
-if __name__ == "__main__":
-    print("🧠 AI Math Agent (Phase 1.5) — Tool-Bound Chain Mode")
-
-    response = llm.invoke("x**3 - 6*x**2 + 11*x - 6")
-    print("\n💬 Gemini Response:")
-    print(response)
-
-    # Correctly access tool_calls from AIMessage
-    tool_calls = response.tool_calls
-
-    if tool_calls:
-        first_call = tool_calls[0]
-        expr_str = first_call["args"]["expr_str"]
-        solution = symbolic_solver.invoke(expr_str)
-        print("💡 Computed Solution:", solution)
-    else:
-        print("No tool calls detected in the response.")
-
-    
+# Access individual parts
+print("\nFinal Answer:", result.final_answer)
