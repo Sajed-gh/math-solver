@@ -1,67 +1,92 @@
 import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-from schema import MathReasoningOutput # Assuming the revised schema above is in schema.py
+from schema import FullProblemOutput # Assuming the revised schema above is in schema.py
 
 load_dotenv()
-api_key = os.environ["GOOGLE_API_KEY"]
+api_key = os.environ.get("GOOGLE_API_KEY")
 
-# Initialize Gemini with structured output
+# Initialize Gemini with the NEW top-level structured output
 llm = ChatGoogleGenerativeAI(
     model='gemini-2.5-flash',
-    temperature=0, # Keep temperature low for high accuracy/rigor
+    temperature=0,
     api_key=api_key
-).with_structured_output(MathReasoningOutput)
+).with_structured_output(FullProblemOutput)
 
-# Example math problem
-math_problem = "Points A and B lie on a circle with radius 1, and arc AB⌢ has a length of π/3. What fraction of the circumference of the circle is the length of arc AB⌢?"
+# Problem Section I from the user's request
+math_problem_section_i = """
+Approximation de ln(x) par des suites
 
-# --- ENHANCEMENT: Direct the Model's Reasoning with a detailed prompt ---
+I. Quelques inégalités
 
-system_instruction = """
-You are a highly rigorous, university-level mathematics tutor. Your task is to solve the user's math problem and structure your reasoning STRICTLY according to the provided JSON schema.
+Dans cette partie, x est un réel quelconque de l'intervalle [1, +∞[.
 
-RULES FOR REASONING AND OUTPUT:
-1.  **Justification is King:** In the 'steps', the 'justification' field must clearly state the specific mathematical rule, formula, or principle being applied (e.g., 'Circumference Formula', 'Definition of a Fraction', 'Isolating Variable'). Do not just say 'calculate' or 'substitute'; state *what* is being calculated or *what* formula is used.
-2.  **LaTeX is Mandatory:** Every single mathematical expression, equation, or numerical result MUST be enclosed in LaTeX delimiters '$' or '$$'. The 'latex_expression' field must contain the complete equation for the step.
-3.  **Strategy Outline:** The 'strategy_outline' must list the necessary high-level steps *before* calculation begins.
-4.  **Common Errors:** Generate a plausible 'common_error_analysis' specific to this problem to enhance pedagogical value.
+Definitions:
+Pour tout réel strictement positif x, on pose T(x) = (x^2 - 1) / (x^2 + 1) et S(x) = (x^2 - 1) / (2x).
+De plus, on pose f(x) = ln(x) - T(x) et g(x) = S(x) - ln(x). (On note que f(1)=g(1)=0)
+
+Questions:
+1. Prouver les inégalités : T(x) ≤ 2T(√x) et 2S(√x) ≤ S(x).
+2. Prouver les encadrements : 0 ≤ f'(x) ≤ (x-1)^2 et 0 ≤ g'(x) ≤ (1/2)(x-1)^2.
+3. En déduire les encadrements : 0 ≤ f(x) ≤ (1/3)(x-1)^3 et 0 ≤ g(x) ≤ (1/6)(x-1)^3.
 """
 
-# The instruction is now packed into the invocation logic
-result: MathReasoningOutput = llm.invoke([system_instruction, math_problem])
+target_language = "French"
 
-# --- Print Structured Output (Adjusted to match new schema) ---
-print("\n" + "="*25)
-print("=== STRUCTURED REASONING RESULT (Enhanced) ===")
-print("="*25)
+# --- REVISED SYSTEM INSTRUCTION ---
+system_instruction = """
+You are a highly rigorous, university-level mathematics tutor. Your task is to solve the multi-part problem and structure your reasoning STRICTLY according to the FullProblemOutput JSON schema.
 
-# 1. Givens
-print("\n1. Givens:")
-for given in result.givens:
-    print(f"  - {given}")
+**LANGUAGE RULE:** All text fields MUST be written entirely in {target_language}.
 
-# 2. Requested
-print("\n2. Requested:")
-print(f"  - {result.requested}")
+RULES FOR REASONING AND OUTPUT:
+1.  **Step Granularity:** Each 'Step' object must represent a **major logical transition or calculation**. Do NOT separate simple algebraic manipulations (like distributing, factoring, or moving a term) into separate steps. Combine multiple small algebraic actions into a single step with a comprehensive 'justification'.
+2.  **Justification is King:** The 'justification' field must be a complete sentence explaining the combined operation (e.g., 'Substitution and simplification of the expression $2T(\sqrt{x})$').
+3.  **Dependency Tracking:** Explicitly populate 'relies_on_questions'.
+4.  **LaTeX is Mandatory:** Every mathematical expression must be enclosed in LaTeX delimiters '$' or '$$' within the 'expression' field.
+"""
 
-# 3. Strategy Outline
-print("\n3. Strategy Outline:")
-for item in result.strategy_outline:
-    print(f"  - {item}")
+# Invoke LLM
+print("Invoking LLM for structured hierarchical solution...")
+result: FullProblemOutput = llm.invoke([system_instruction, math_problem_section_i])
+
+# --- REVISED PRINTING METHOD FOR HIERARCHICAL SCHEMA ---
+print("\n" + "="*50)
+print(f"=== STRUCTURED REASONING RESULT: {result.problem_title} ===")
+print("="*50)
+
+for question in result.questions:
+    print(f"\n## Question {question.question_label}")
+    print("--------------------------------------------------")
     
-# 4. Step-by-step Calculation (Simplified print, only showing one math field)
-print("\n4. Step-by-step Calculation:")
-for step in result.steps:
-    print(f"  [{step.step_number}]: {step.justification}")
-    print(f"  \t-> {step.expression}") # Only printing the LaTeX version
+    # 1. Givens & Requested
+    print("  Givens:")
+    for given in question.givens:
+        print(f"    - {given}")
+    print(f"  Requested: {question.requested}")
     
-# 5. Final Answer
-print("\n5. Final Answer:")
-print(f"  {result.final_answer}")
+    # 2. Dependency Tracking
+    if question.relies_on_questions:
+        print(f"  Relies On: {', '.join(question.relies_on_questions)}")
+    
+    # 3. Strategy Outline
+    print("\n  Strategy Outline:")
+    for item in question.strategy_outline:
+        print(f"    - {item}")
+        
+    # 4. Step-by-step Calculation
+    print("\n  Step-by-step Derivation:")
+    for step in question.steps:
+        print(f"    [{step.step_number}]: **{step.justification}**")
+        print(f"    \t{step.expression}")
+        
+    # 5. Final Answer
+    print("\n  Final Answer:")
+    print(f"    {question.final_answer}")
+    
+    # 6. Common Error Analysis
+    if question.common_error_analysis:
+        print("\n  Common Error Analysis:")
+        print(f"    {question.common_error_analysis}")
 
-# 6. Common Error Analysis
-if result.common_error_analysis:
-    print("\n6. Common Error Analysis:")
-    print(f"  {result.common_error_analysis}")
-print("="*25)
+print("\n" + "="*50)
