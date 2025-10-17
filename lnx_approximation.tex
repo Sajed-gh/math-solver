@@ -1,0 +1,32 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=2cm}
+\begin{document}
+\section*{Approximation de ln(x) par des suites}
+\subsection*{Question 1: Prouver les inégalités $T(x) \le 2T(\sqrt{x})$ et $2S(\sqrt{x}) \le S(x)$ pour tout $x \in [1, +\infty[$.}
+\paragraph*{Étape 1:} Substitution des définitions de $T(x)$ et $T(\sqrt{x})$.
+\[ $T(x) \le 2T(\sqrt{x}) \iff \frac{x^2 - 1}{x^2 + 1} \le 2 \frac{x - 1}{x + 1}$ \]
+\paragraph*{Étape 2:} Factorisation de $x^2-1$ et simplification pour $x > 1$.
+\[ $\frac{(x-1)(x+1)}{x^2 + 1} \le 2 \frac{x - 1}{x + 1} \iff \frac{x+1}{x^2 + 1} \le \frac{2}{x + 1}$ \]
+\paragraph*{Étape 3:} Réarrangement algébrique.
+\[ $(x+1)^2 \le 2(x^2 + 1)$ \]
+\paragraph*{Étape 4:} Développement et simplification.
+\[ $x^2 + 2x + 1 \le 2x^2 + 2 \iff 0 \le x^2 - 2x + 1$ \]
+\paragraph*{Étape 5:} Identité remarquable.
+\[ $0 \le (x-1)^2$, ce qui est vrai pour tout $x \in [1, +\infty[$. \]
+\paragraph*{Étape 6:} Substitution des définitions de $S(x)$ et $S(\sqrt{x})$.
+\[ $2S(\sqrt{x}) \le S(x) \iff 2 \frac{x - 1}{2\sqrt{x}} \le \frac{x^2 - 1}{2x}$ \]
+\paragraph*{Étape 7:} Simplification et factorisation de $x^2-1$.
+\[ $\frac{x - 1}{\sqrt{x}} \le \frac{(x-1)(x+1)}{2x}$ \]
+\paragraph*{Étape 8:} Réarrangement algébrique pour $x > 1$.
+\[ $2x \le \sqrt{x}(x+1) \iff 2\sqrt{x} \le x+1$ \]
+\paragraph*{Étape 9:} Réarrangement.
+\[ $0 \le x - 2\sqrt{x} + 1$ \]
+\paragraph*{Étape 10:} Identité remarquable.
+\[ $0 \le (\sqrt{x} - 1)^2$, ce qui est vrai pour tout $x \in [1, +\infty[$. \]
+\paragraph*{Résultat:} $\text{N/A}$
+\end{document}

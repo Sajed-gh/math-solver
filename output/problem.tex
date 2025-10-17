@@ -1,0 +1,332 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, geometry, xcolor}
+\geometry{margin=1in}
+\begin{document}
+\section*{Approximation de ln(x) par des suites}
+
+\subsection*{Question I.1}
+\textbf{Givens:}
+\begin{itemize}
+  \item $x \textbackslash{}in [1, +\textbackslash{}infty[$
+  \item $T(x) = \textbackslash{}frac\textbackslash{}{x\textbackslash{}textasciicircum{}2 - 1\textbackslash{}}\textbackslash{}{x\textbackslash{}textasciicircum{}2 + 1\textbackslash{}}$
+  \item $S(x) = \textbackslash{}frac\textbackslash{}{x\textbackslash{}textasciicircum{}2 - 1\textbackslash{}}\textbackslash{}{2x\textbackslash{}}$
+\end{itemize}
+\textbf{Requested:} $T(x) \textbackslash{}le 2T(\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}})$ et $2S(\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}}) \textbackslash{}le S(x)$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item Substitute $\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}}$ into $T(x)$ and $S(x)$ definitions.
+  \item Simplify $2T(\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}})$ and $2S(\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}})$.
+  \item Prove the inequalities by algebraic manipulation, showing they reduce to $(x-1)\textbackslash{}textasciicircum{}2 \textbackslash{}ge 0$ or $(\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}}-1)\textbackslash{}textasciicircum{}2 \textbackslash{}ge 0$.
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} Substitution de $\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}}$ dans $T(x)$ et simplification \\
+        \textbf{Expression:} $2T(\sqrt{x}) = 2 \frac{(\sqrt{x})^2 - 1}{(\sqrt{x})^2 + 1} = \frac{2(x-1)}{x+1}$
+  \item \textbf{Justification:} Énoncé de l'inégalité à prouver \\
+        \textbf{Expression:} $T(x) \le 2T(\sqrt{x}) \iff \frac{x^2 - 1}{x^2 + 1} \le \frac{2(x-1)}{x+1}$
+  \item \textbf{Justification:} Factorisation de $x\textbackslash{}textasciicircum{}2-1$ \\
+        \textbf{Expression:} $ \frac{(x-1)(x+1)}{x^2 + 1} \le \frac{2(x-1)}{x+1}$
+  \item \textbf{Justification:} Division par $(x-1)$ (valide pour $x>1$, trivial pour $x=1$) \\
+        \textbf{Expression:} $ \frac{x+1}{x^2 + 1} \le \frac{2}{x+1}$ pour $x > 1$
+  \item \textbf{Justification:} Multiplication croisée \\
+        \textbf{Expression:} $(x+1)^2 \le 2(x^2 + 1)$
+  \item \textbf{Justification:} Développement \\
+        \textbf{Expression:} $x^2 + 2x + 1 \le 2x^2 + 2$
+  \item \textbf{Justification:} Réarrangement algébrique \\
+        \textbf{Expression:} $0 \le x^2 - 2x + 1$
+  \item \textbf{Justification:} Factorisation, toujours vrai \\
+        \textbf{Expression:} $0 \le (x-1)^2$
+  \item \textbf{Justification:} Substitution de $\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}}$ dans $S(x)$ et simplification \\
+        \textbf{Expression:} $2S(\sqrt{x}) = 2 \frac{(\sqrt{x})^2 - 1}{2\sqrt{x}} = \frac{x-1}{\sqrt{x}}$
+  \item \textbf{Justification:} Énoncé de l'inégalité à prouver \\
+        \textbf{Expression:} $2S(\sqrt{x}) \le S(x) \iff \frac{x-1}{\sqrt{x}} \le \frac{x^2 - 1}{2x}$
+  \item \textbf{Justification:} Factorisation de $x\textbackslash{}textasciicircum{}2-1$ \\
+        \textbf{Expression:} $ \frac{x-1}{\sqrt{x}} \le \frac{(x-1)(x+1)}{2x}$
+  \item \textbf{Justification:} Division par $(x-1)$ (valide pour $x>1$, trivial pour $x=1$) \\
+        \textbf{Expression:} $ \frac{1}{\sqrt{x}} \le \frac{x+1}{2x}$ pour $x > 1$
+  \item \textbf{Justification:} Multiplication croisée \\
+        \textbf{Expression:} $2x \le \sqrt{x}(x+1)$
+  \item \textbf{Justification:} Division par $\textbackslash{}sqrt\textbackslash{}{x\textbackslash{}}$ \\
+        \textbf{Expression:} $2\sqrt{x} \le x+1$
+  \item \textbf{Justification:} Réarrangement algébrique \\
+        \textbf{Expression:} $0 \le x - 2\sqrt{x} + 1$
+  \item \textbf{Justification:} Factorisation, toujours vrai \\
+        \textbf{Expression:} $0 \le (\sqrt{x}-1)^2$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{$\text{Les inégalités sont prouvées.}$}
+
+\subsection*{Question I.2}
+\textbf{Givens:}
+\begin{itemize}
+  \item $f(x) = \textbackslash{}ln(x) - T(x)$
+  \item $g(x) = S(x) - \textbackslash{}ln(x)$
+  \item $T(x) = \textbackslash{}frac\textbackslash{}{x\textbackslash{}textasciicircum{}2 - 1\textbackslash{}}\textbackslash{}{x\textbackslash{}textasciicircum{}2 + 1\textbackslash{}}$
+  \item $S(x) = \textbackslash{}frac\textbackslash{}{x\textbackslash{}textasciicircum{}2 - 1\textbackslash{}}\textbackslash{}{2x\textbackslash{}}$
+  \item $x \textbackslash{}in [1, +\textbackslash{}infty[$
+\end{itemize}
+\textbf{Requested:} a) $f'(x) = \textbackslash{}frac\textbackslash{}{(x\textbackslash{}textasciicircum{}2 - 1)\textbackslash{}textasciicircum{}2\textbackslash{}}\textbackslash{}{x(x\textbackslash{}textasciicircum{}2 + 1)\textbackslash{}textasciicircum{}2\textbackslash{}}$ et $g'(x) = \textbackslash{}frac\textbackslash{}{(x-1)\textbackslash{}textasciicircum{}2\textbackslash{}}\textbackslash{}{2x\textbackslash{}textasciicircum{}2\textbackslash{}}$ ; b) $0 \textbackslash{}le f'(x) \textbackslash{}le (x-1)\textbackslash{}textasciicircum{}2$ et $0 \textbackslash{}le g'(x) \textbackslash{}le \textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{2\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}2$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item Calculate the derivatives $f'(x)$ and $g'(x)$ using quotient rule and chain rule.
+  \item Simplify the derivatives to match the given expressions.
+  \item For part b), analyze the sign of the derivatives and prove the upper bounds by algebraic manipulation.
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} Définition de $f'(x)$ \\
+        \textbf{Expression:} $f'(x) = \frac{d}{dx}(\ln(x) - \frac{x^2 - 1}{x^2 + 1})$
+  \item \textbf{Justification:} Application des règles de dérivation \\
+        \textbf{Expression:} $f'(x) = \frac{1}{x} - \frac{2x(x^2+1) - (x^2-1)(2x)}{(x^2+1)^2}$
+  \item \textbf{Justification:} Simplification du numérateur \\
+        \textbf{Expression:} $f'(x) = \frac{1}{x} - \frac{2x^3 + 2x - 2x^3 + 2x}{(x^2+1)^2} = \frac{1}{x} - \frac{4x}{(x^2+1)^2}$
+  \item \textbf{Justification:} Mise au même dénominateur et développement \\
+        \textbf{Expression:} $f'(x) = \frac{(x^2+1)^2 - 4x^2}{x(x^2+1)^2} = \frac{x^4 + 2x^2 + 1 - 4x^2}{x(x^2+1)^2}$
+  \item \textbf{Justification:} Factorisation du numérateur \\
+        \textbf{Expression:} $f'(x) = \frac{x^4 - 2x^2 + 1}{x(x^2+1)^2} = \frac{(x^2 - 1)^2}{x(x^2 + 1)^2}$
+  \item \textbf{Justification:} Définition de $g'(x)$ \\
+        \textbf{Expression:} $g'(x) = \frac{d}{dx}(\frac{x^2 - 1}{2x} - \ln(x))$
+  \item \textbf{Justification:} Application des règles de dérivation \\
+        \textbf{Expression:} $g'(x) = \frac{1}{2} \frac{2x(x) - (x^2-1)(1)}{x^2} - \frac{1}{x}$
+  \item \textbf{Justification:} Simplification du numérateur \\
+        \textbf{Expression:} $g'(x) = \frac{1}{2} \frac{2x^2 - x^2 + 1}{x^2} - \frac{1}{x} = \frac{x^2 + 1}{2x^2} - \frac{1}{x}$
+  \item \textbf{Justification:} Mise au même dénominateur et factorisation du numérateur \\
+        \textbf{Expression:} $g'(x) = \frac{x^2 + 1 - 2x}{2x^2} = \frac{(x-1)^2}{2x^2}$
+  \item \textbf{Justification:} Le numérateur est un carré, le dénominateur est positif pour $x \textbackslash{}ge 1$ \\
+        \textbf{Expression:} $f'(x) = \frac{(x^2 - 1)^2}{x(x^2 + 1)^2} \ge 0$
+  \item \textbf{Justification:} Énoncé de l'inégalité à prouver \\
+        \textbf{Expression:} $f'(x) \le (x-1)^2 \iff \frac{(x^2 - 1)^2}{x(x^2 + 1)^2} \le (x-1)^2$
+  \item \textbf{Justification:} Factorisation de $x\textbackslash{}textasciicircum{}2-1$ \\
+        \textbf{Expression:} $ \frac{(x-1)^2(x+1)^2}{x(x^2 + 1)^2} \le (x-1)^2$
+  \item \textbf{Justification:} Division par $(x-1)\textbackslash{}textasciicircum{}2$ (valide pour $x>1$, trivial pour $x=1$) \\
+        \textbf{Expression:} $ \frac{(x+1)^2}{x(x^2 + 1)^2} \le 1$ pour $x > 1$
+  \item \textbf{Justification:} Multiplication par le dénominateur \\
+        \textbf{Expression:} $(x+1)^2 \le x(x^2 + 1)^2$
+  \item \textbf{Justification:} Développement \\
+        \textbf{Expression:} $x^2 + 2x + 1 \le x(x^4 + 2x^2 + 1) = x^5 + 2x^3 + x$
+  \item \textbf{Justification:} Réarrangement algébrique. La fonction $h(x) = x(x\textbackslash{}textasciicircum{}2+1)\textbackslash{}textasciicircum{}2 - (x+1)\textbackslash{}textasciicircum{}2$ a $h(1)=0$ et $h'(x) > 0$ pour $x \textbackslash{}ge 1$, donc $h(x) \textbackslash{}ge 0$. \\
+        \textbf{Expression:} $0 \le x^5 + 2x^3 - x^2 - x - 1$
+  \item \textbf{Justification:} Le numérateur est un carré, le dénominateur est positif pour $x \textbackslash{}ge 1$ \\
+        \textbf{Expression:} $g'(x) = \frac{(x-1)^2}{2x^2} \ge 0$
+  \item \textbf{Justification:} Énoncé de l'inégalité à prouver \\
+        \textbf{Expression:} $g'(x) \le \frac{1}{2}(x-1)^2 \iff \frac{(x-1)^2}{2x^2} \le \frac{1}{2}(x-1)^2$
+  \item \textbf{Justification:} Division par $\textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{2\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}2$ (valide pour $x>1$, trivial pour $x=1$) \\
+        \textbf{Expression:} $ \frac{1}{x^2} \le 1$ pour $x > 1$
+  \item \textbf{Justification:} Multiplication par $x\textbackslash{}textasciicircum{}2$, toujours vrai pour $x \textbackslash{}ge 1$ \\
+        \textbf{Expression:} $1 \le x^2$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{$\text{Les dérivées et les encadrements sont prouvés.}$}
+
+\subsection*{Question I.3}
+\textbf{Givens:}
+\begin{itemize}
+  \item $f(1)=0$
+  \item $g(1)=0$
+  \item $0 \textbackslash{}le f'(x) \textbackslash{}le (x-1)\textbackslash{}textasciicircum{}2$
+  \item $0 \textbackslash{}le g'(x) \textbackslash{}le \textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{2\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}2$
+\end{itemize}
+\textbf{Requested:} $0 \textbackslash{}le f(x) \textbackslash{}le \textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{3\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}3$ et $0 \textbackslash{}le g(x) \textbackslash{}le \textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{6\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}3$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item Integrate the inequalities for $f'(x)$ and $g'(x)$ from $1$ to $x$.
+  \item Use the given initial conditions $f(1)=0$ and $g(1)=0$.
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} Intégration de l'encadrement de $f'(x)$ sur $[1, x]$ \\
+        \textbf{Expression:} $\int_1^x 0 \, dt \le \int_1^x f'(t) \, dt \le \int_1^x (t-1)^2 \, dt$
+  \item \textbf{Justification:} Calcul des intégrales \\
+        \textbf{Expression:} $0 \le [f(t)]_1^x \le \left[ \frac{(t-1)^3}{3} \right]_1^x$
+  \item \textbf{Justification:} Application du théorème fondamental du calcul \\
+        \textbf{Expression:} $0 \le f(x) - f(1) \le \frac{(x-1)^3}{3} - \frac{(1-1)^3}{3}$
+  \item \textbf{Justification:} Utilisation de $f(1)=0$ et simplification \\
+        \textbf{Expression:} $0 \le f(x) \le \frac{1}{3}(x-1)^3$
+  \item \textbf{Justification:} Intégration de l'encadrement de $g'(x)$ sur $[1, x]$ \\
+        \textbf{Expression:} $\int_1^x 0 \, dt \le \int_1^x g'(t) \, dt \le \int_1^x \frac{1}{2}(t-1)^2 \, dt$
+  \item \textbf{Justification:} Calcul des intégrales \\
+        \textbf{Expression:} $0 \le [g(t)]_1^x \le \frac{1}{2} \left[ \frac{(t-1)^3}{3} \right]_1^x$
+  \item \textbf{Justification:} Application du théorème fondamental du calcul \\
+        \textbf{Expression:} $0 \le g(x) - g(1) \le \frac{1}{2} \left( \frac{(x-1)^3}{3} - \frac{(1-1)^3}{3} \right)$
+  \item \textbf{Justification:} Utilisation de $g(1)=0$ et simplification \\
+        \textbf{Expression:} $0 \le g(x) \le \frac{1}{6}(x-1)^3$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{$\text{Les encadrements sont déduits.}$}
+
+\subsection*{Question II.1}
+\textbf{Givens:}
+\begin{itemize}
+  \item $x \textbackslash{}in ]1, +\textbackslash{}infty[$
+  \item $x\textbackslash{}_0 = x$
+  \item $x\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} = \textbackslash{}sqrt\textbackslash{}{x\textbackslash{}_n\textbackslash{}}$
+  \item $t\textbackslash{}_n = 2\textbackslash{}textasciicircum{}n T(x\textbackslash{}_n)$
+  \item $s\textbackslash{}_n = 2\textbackslash{}textasciicircum{}n S(x\textbackslash{}_n)$
+\end{itemize}
+\textbf{Requested:} a) Limite de $(x\textbackslash{}_n)$ ; b) $t\textbackslash{}_n \textbackslash{}le t\textbackslash{}_\textbackslash{}{n+1\textbackslash{}}$ et $s\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} \textbackslash{}le s\textbackslash{}_n$ ; c) Monotonie de $(t\textbackslash{}_n)$ et $(s\textbackslash{}_n)$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item For a), find fixed points of $x\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} = \textbackslash{}sqrt\textbackslash{}{x\textbackslash{}_n\textbackslash{}}$ and analyze monotonicity.
+  \item For b), use the inequalities from Question I.1 with $x\textbackslash{}_n$ and $x\textbackslash{}_\textbackslash{}{n+1\textbackslash{}}$.
+  \item For c), directly state monotonicity from b).
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} Recherche des points fixes de la relation de récurrence \\
+        \textbf{Expression:} $L = \sqrt{L} \implies L^2 = L \implies L(L-1) = 0$
+  \item \textbf{Justification:} Résolution de l'équation \\
+        \textbf{Expression:} $L=0$ ou $L=1$
+  \item \textbf{Justification:} Analyse de la relation $x\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} = \textbackslash{}sqrt\textbackslash{}{x\textbackslash{}_n\textbackslash{}}$ pour $x\textbackslash{}_n > 1$ \\
+        \textbf{Expression:} $x_n > 1 \implies \sqrt{x_n} < x_n$
+  \item \textbf{Justification:} La suite $(x\textbackslash{}_n)$ est décroissante \\
+        \textbf{Expression:} $x_{n+1} < x_n$
+  \item \textbf{Justification:} La suite est minorée par 1 \\
+        \textbf{Expression:} $x_n > 1$ pour tout $n$
+  \item \textbf{Justification:} Une suite décroissante et minorée converge vers son point fixe \\
+        \textbf{Expression:} $\lim_{n \to +\infty} x_n = 1$
+  \item \textbf{Justification:} Inégalité de la Question I.1 appliquée à $x\textbackslash{}_n$ \\
+        \textbf{Expression:} $T(x_n) \le 2T(\sqrt{x_n})$
+  \item \textbf{Justification:} Substitution de $x\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} = \textbackslash{}sqrt\textbackslash{}{x\textbackslash{}_n\textbackslash{}}$ \\
+        \textbf{Expression:} $T(x_n) \le 2T(x_{n+1})$
+  \item \textbf{Justification:} Multiplication par $2\textbackslash{}textasciicircum{}n$ \\
+        \textbf{Expression:} $2^n T(x_n) \le 2^{n+1} T(x_{n+1})$
+  \item \textbf{Justification:} Définition de $t\textbackslash{}_n$ et $t\textbackslash{}_\textbackslash{}{n+1\textbackslash{}}$ \\
+        \textbf{Expression:} $t_n \le t_{n+1}$
+  \item \textbf{Justification:} Inégalité de la Question I.1 appliquée à $x\textbackslash{}_n$ \\
+        \textbf{Expression:} $2S(\sqrt{x_n}) \le S(x_n)$
+  \item \textbf{Justification:} Substitution de $x\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} = \textbackslash{}sqrt\textbackslash{}{x\textbackslash{}_n\textbackslash{}}$ \\
+        \textbf{Expression:} $2S(x_{n+1}) \le S(x_n)$
+  \item \textbf{Justification:} Multiplication par $2\textbackslash{}textasciicircum{}n$ \\
+        \textbf{Expression:} $2^{n+1} S(x_{n+1}) \le 2^n S(x_n)$
+  \item \textbf{Justification:} Définition de $s\textbackslash{}_n$ et $s\textbackslash{}_\textbackslash{}{n+1\textbackslash{}}$ \\
+        \textbf{Expression:} $s_{n+1} \le s_n$
+  \item \textbf{Justification:} D'après $t\textbackslash{}_n \textbackslash{}le t\textbackslash{}_\textbackslash{}{n+1\textbackslash{}}$ \\
+        \textbf{Expression:} $\text{La suite } (t_n)_{n \in \mathbb{N}} \text{ est croissante.}$
+  \item \textbf{Justification:} D'après $s\textbackslash{}_\textbackslash{}{n+1\textbackslash{}} \textbackslash{}le s\textbackslash{}_n$ \\
+        \textbf{Expression:} $\text{La suite } (s_n)_{n \in \mathbb{N}} \text{ est décroissante.}$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{a) $\lim_{n \to +\infty} x_n = 1$ ; b) $t_n \le t_{n+1}$ et $s_{n+1} \le s_n$ ; c) $(t_n)$ est croissante et $(s_n)$ est décroissante.}
+
+\subsection*{Question II.2}
+\textbf{Givens:}
+\begin{itemize}
+  \item $f(x) = \textbackslash{}ln(x) - T(x)$
+  \item $g(x) = S(x) - \textbackslash{}ln(x)$
+  \item $0 \textbackslash{}le f(x) \textbackslash{}le \textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{3\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}3$
+  \item $0 \textbackslash{}le g(x) \textbackslash{}le \textbackslash{}frac\textbackslash{}{1\textbackslash{}}\textbackslash{}{6\textbackslash{}}(x-1)\textbackslash{}textasciicircum{}3$
+  \item $x\textbackslash{}_n = x\textbackslash{}textasciicircum{}\textbackslash{}{1/2\textbackslash{}textasciicircum{}n\textbackslash{}}$
+  \item $t\textbackslash{}_n = 2\textbackslash{}textasciicircum{}n T(x\textbackslash{}_n)$
+  \item $s\textbackslash{}_n = 2\textbackslash{}textasciicircum{}n S(x\textbackslash{}_n)$
+\end{itemize}
+\textbf{Requested:} $t\textbackslash{}_n \textbackslash{}le \textbackslash{}ln(x) \textbackslash{}le s\textbackslash{}_n$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item Use $f(x\textbackslash{}_n) \textbackslash{}ge 0$ and $g(x\textbackslash{}_n) \textbackslash{}ge 0$ from Question I.3.
+  \item Substitute the definitions of $f(x\textbackslash{}_n)$ and $g(x\textbackslash{}_n)$ to get inequalities involving $\textbackslash{}ln(x\textbackslash{}_n)$.
+  \item Relate $\textbackslash{}ln(x\textbackslash{}_n)$ to $\textbackslash{}ln(x)$ using $x\textbackslash{}_n = x\textbackslash{}textasciicircum{}\textbackslash{}{1/2\textbackslash{}textasciicircum{}n\textbackslash{}}$.
+  \item Multiply by $2\textbackslash{}textasciicircum{}n$ to obtain the desired encadrement.
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} Utilisation de l'inégalité $f(x) \textbackslash{}ge 0$ de I.3 \\
+        \textbf{Expression:} $f(x_n) \ge 0 \implies \ln(x_n) - T(x_n) \ge 0 \implies T(x_n) \le \ln(x_n)$
+  \item \textbf{Justification:} Utilisation de l'inégalité $g(x) \textbackslash{}ge 0$ de I.3 \\
+        \textbf{Expression:} $g(x_n) \ge 0 \implies S(x_n) - \ln(x_n) \ge 0 \implies \ln(x_n) \le S(x_n)$
+  \item \textbf{Justification:} Combinaison des deux inégalités précédentes \\
+        \textbf{Expression:} $T(x_n) \le \ln(x_n) \le S(x_n)$
+  \item \textbf{Justification:} Propriété des logarithmes et définition de $x\textbackslash{}_n$ \\
+        \textbf{Expression:} $\ln(x_n) = \ln(x^{1/2^n}) = \frac{1}{2^n} \ln(x)$
+  \item \textbf{Justification:} Substitution de $\textbackslash{}ln(x\textbackslash{}_n)$ \\
+        \textbf{Expression:} $T(x_n) \le \frac{1}{2^n} \ln(x) \le S(x_n)$
+  \item \textbf{Justification:} Multiplication par $2\textbackslash{}textasciicircum{}n$ \\
+        \textbf{Expression:} $2^n T(x_n) \le \ln(x) \le 2^n S(x_n)$
+  \item \textbf{Justification:} Définition de $t\textbackslash{}_n$ et $s\textbackslash{}_n$ \\
+        \textbf{Expression:} $t_n \le \ln(x) \le s_n$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{$t_n \le \ln(x) \le s_n$}
+
+\subsection*{Question II.3}
+\textbf{Givens:}
+\begin{itemize}
+  \item $t\textbackslash{}_n = 2\textbackslash{}textasciicircum{}n T(x\textbackslash{}_n)$
+  \item $s\textbackslash{}_n = 2\textbackslash{}textasciicircum{}n S(x\textbackslash{}_n)$
+  \item $T(x) = \textbackslash{}frac\textbackslash{}{x\textbackslash{}textasciicircum{}2 - 1\textbackslash{}}\textbackslash{}{x\textbackslash{}textasciicircum{}2 + 1\textbackslash{}}$
+  \item $S(x) = \textbackslash{}frac\textbackslash{}{x\textbackslash{}textasciicircum{}2 - 1\textbackslash{}}\textbackslash{}{2x\textbackslash{}}$
+  \item $\textbackslash{}lim\textbackslash{}_\textbackslash{}{n \textbackslash{}to +\textbackslash{}infty\textbackslash{}} x\textbackslash{}_n = 1$
+\end{itemize}
+\textbf{Requested:} a) $s\textbackslash{}_n - t\textbackslash{}_n = \textbackslash{}frac\textbackslash{}{2\textbackslash{}textasciicircum{}n (x\textbackslash{}_n - 1)\textbackslash{}textasciicircum{}2\textbackslash{}}\textbackslash{}{2x\textbackslash{}_n (x\textbackslash{}_n + 1)\textbackslash{}}$ ; b) $\textbackslash{}lim\textbackslash{}_\textbackslash{}{n \textbackslash{}to +\textbackslash{}infty\textbackslash{}} (s\textbackslash{}_n - t\textbackslash{}_n) = 0$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item For a), substitute the definitions of $s\textbackslash{}_n$, $t\textbackslash{}_n$, $S(x\textbackslash{}_n)$, and $T(x\textbackslash{}_n)$ and simplify the expression. (Note: The problem statement's target expression for $s\textbackslash{}_n - t\textbackslash{}_n$ appears to be incorrect. The derivation will lead to a different, mathematically correct expression.)
+  \item For b), use the derived expression for $s\textbackslash{}_n - t\textbackslash{}_n$ and the limit of $x\textbackslash{}_n$ to evaluate the limit.
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} Définition de $s\textbackslash{}_n$ et $t\textbackslash{}_n$ \\
+        \textbf{Expression:} $s_n - t_n = 2^n S(x_n) - 2^n T(x_n) = 2^n (S(x_n) - T(x_n))$
+  \item \textbf{Justification:} Substitution des définitions de $S(x\textbackslash{}_n)$ et $T(x\textbackslash{}_n)$ \\
+        \textbf{Expression:} $S(x_n) - T(x_n) = \frac{x_n^2 - 1}{2x_n} - \frac{x_n^2 - 1}{x_n^2 + 1}$
+  \item \textbf{Justification:} Factorisation par $(x\textbackslash{}_n\textbackslash{}textasciicircum{}2 - 1)$ \\
+        \textbf{Expression:} $S(x_n) - T(x_n) = (x_n^2 - 1) \left( \frac{1}{2x_n} - \frac{1}{x_n^2 + 1} \right)$
+  \item \textbf{Justification:} Mise au même dénominateur \\
+        \textbf{Expression:} $S(x_n) - T(x_n) = (x_n^2 - 1) \left( \frac{x_n^2 + 1 - 2x_n}{2x_n(x_n^2 + 1)} \right)$
+  \item \textbf{Justification:} Factorisation de $x\textbackslash{}_n\textbackslash{}textasciicircum{}2 - 1$ et $x\textbackslash{}_n\textbackslash{}textasciicircum{}2 - 2x\textbackslash{}_n + 1$ \\
+        \textbf{Expression:} $S(x_n) - T(x_n) = (x_n - 1)(x_n + 1) \frac{(x_n - 1)^2}{2x_n(x_n^2 + 1)}$
+  \item \textbf{Justification:} Substitution dans l'expression de $s\textbackslash{}_n - t\textbackslash{}_n$ (Note: L'expression donnée dans la question II.3.a est incorrecte. Ceci est la dérivation correcte.) \\
+        \textbf{Expression:} $s_n - t_n = \frac{2^n (x_n - 1)^3 (x_n + 1)}{2x_n(x_n^2 + 1)}$
+  \item \textbf{Justification:} Énoncé de la limite à calculer \\
+        \textbf{Expression:} $\lim_{n \to +\infty} (s_n - t_n) = \lim_{n \to +\infty} \frac{2^n (x_n - 1)^3 (x_n + 1)}{2x_n(x_n^2 + 1)}$
+  \item \textbf{Justification:} Résultat de la Question II.1.a \\
+        \textbf{Expression:} $\lim_{n \to +\infty} x_n = 1$
+  \item \textbf{Justification:} Approximation de Taylor de $e\textbackslash{}textasciicircum{}u - 1 \textbackslash{}approx u$ pour $u \textbackslash{}to 0$ \\
+        \textbf{Expression:} $x_n - 1 = x^{1/2^n} - 1 \approx \frac{\ln x}{2^n}$ pour $n \to +\infty$
+  \item \textbf{Justification:} Substitution de l'approximation \\
+        \textbf{Expression:} $(x_n - 1)^3 \approx \left( \frac{\ln x}{2^n} \right)^3 = \frac{(\ln x)^3}{2^{3n}}$
+  \item \textbf{Justification:} Simplification \\
+        \textbf{Expression:} $2^n (x_n - 1)^3 \approx 2^n \frac{(\ln x)^3}{2^{3n}} = \frac{(\ln x)^3}{2^{2n}}$
+  \item \textbf{Justification:} Substitution des limites des termes et simplification \\
+        \textbf{Expression:} $\lim_{n \to +\infty} (s_n - t_n) = \lim_{n \to +\infty} \frac{(\ln x)^3 / 2^{2n} \cdot (1+1)}{2 \cdot 1 \cdot (1^2+1)} = \lim_{n \to +\infty} \frac{2(\ln x)^3}{4 \cdot 2^{2n}} = \lim_{n \to +\infty} \frac{(\ln x)^3}{2^{2n+1}}$
+  \item \textbf{Justification:} Le dénominateur tend vers l'infini, donc la fraction tend vers 0 \\
+        \textbf{Expression:} $\lim_{n \to +\infty} (s_n - t_n) = 0$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{a) $s_n - t_n = \frac{2^n (x_n - 1)^3 (x_n + 1)}{2x_n(x_n^2 + 1)}$ ; b) $\lim_{n \to +\infty} (s_n - t_n) = 0$}
+
+\subsection*{Question II.4}
+\textbf{Givens:}
+\begin{itemize}
+  \item $(t\textbackslash{}_n)$ est croissante
+  \item $(s\textbackslash{}_n)$ est décroissante
+  \item $t\textbackslash{}_n \textbackslash{}le \textbackslash{}ln(x) \textbackslash{}le s\textbackslash{}_n$
+  \item $\textbackslash{}lim\textbackslash{}_\textbackslash{}{n \textbackslash{}to +\textbackslash{}infty\textbackslash{}} (s\textbackslash{}_n - t\textbackslash{}_n) = 0$
+\end{itemize}
+\textbf{Requested:} Nature (convergence et limite) des suites $(t\textbackslash{}_n)$ et $(s\textbackslash{}_n)$
+
+\textbf{Strategy Outline:}
+\begin{enumerate}
+  \item List the properties of the sequences $(t\textbackslash{}_n)$ and $(s\textbackslash{}_n)$.
+  \item Conclude that they are adjacent sequences.
+  \item State the convergence and common limit based on the definition of adjacent sequences.
+\end{enumerate}
+\textbf{Detailed Steps:}
+\begin{enumerate}
+  \item \textbf{Justification:} D'après la Question II.1.c \\
+        \textbf{Expression:} $\text{La suite } (t_n)_{n \in \mathbb{N}} \text{ est croissante.}$
+  \item \textbf{Justification:} D'après la Question II.1.c \\
+        \textbf{Expression:} $\text{La suite } (s_n)_{n \in \mathbb{N}} \text{ est décroissante.}$
+  \item \textbf{Justification:} D'après la Question II.2 ($t\textbackslash{}_n \textbackslash{}le \textbackslash{}ln(x) \textbackslash{}le s\textbackslash{}_n$) \\
+        \textbf{Expression:} $t_n \le s_n \text{ pour tout } n \in \mathbb{N}$
+  \item \textbf{Justification:} D'après la Question II.3.b \\
+        \textbf{Expression:} $\lim_{n \to +\infty} (s_n - t_n) = 0$
+  \item \textbf{Justification:} Définition des suites adjacentes (monotonie opposée, $t\textbackslash{}_n \textbackslash{}le s\textbackslash{}_n$, et différence tendant vers 0) \\
+        \textbf{Expression:} $\text{Les suites } (t_n) \text{ et } (s_n) \text{ sont adjacentes.}$
+  \item \textbf{Justification:} Propriété des suites adjacentes \\
+        \textbf{Expression:} $\text{Les suites adjacentes convergent vers la même limite.}$
+  \item \textbf{Justification:} L'encadrement $t\textbackslash{}_n \textbackslash{}le \textbackslash{}ln(x) \textbackslash{}le s\textbackslash{}_n$ et la convergence vers une limite commune impliquent que cette limite est $\textbackslash{}ln(x)$ \\
+        \textbf{Expression:} $\lim_{n \to +\infty} t_n = \ln(x) \text{ et } \lim_{n \to +\infty} s_n = \ln(x)$
+\end{enumerate}
+\textbf{Final Answer:} \boxed{$\text{Les suites } (t_n) \text{ et } (s_n) \text{ sont adjacentes et convergent toutes deux vers } \ln(x).$}
+
+\end{document}

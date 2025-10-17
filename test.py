@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from schema import FullProblemOutput # Assuming the revised schema above is in schema.py
 
+
+
 load_dotenv()
 api_key = os.environ.get("GOOGLE_API_KEY")
 
@@ -75,54 +77,44 @@ Que peut-on en déduire concernant la nature (convergence et limite) des suites 
 target_language = "French"
 
 # --- REVISED SYSTEM INSTRUCTION (OPTIMIZED FOR CONCISENESS) ---
-system_instruction = """
-Task: Solve the multi-part mathematical problem. Structure all output STRICTLY according to the provided JSON schema. 
+system_instruction = """Solve all questions. Follow schema exactly.
 
-MANDATORY RULES:
-- Every Question MUST include every required field in the schema.
-- If 'final_answer' is not numerically determinable, use '$\\text{N/A}$' as a placeholder.
-- 'expression' fields contain ONLY valid LaTeX math — no prose.
-- 'justification' fields are concise and reference the action (e.g. "Apply derivative definition").
-- 'strategy_outline' is a short list of logical phases.
-
-CONCISENESS RULES:
-1. Each 'Step' represents a significant logical move (not minor algebra).
-2. Avoid redundancy and prose explanations.
-3. Follow the schema exactly.
+RULES:
+- Steps: Major logical moves only. Combine simple algebra.
+- action: Cite theorem/rule used. Max 10 words.
+- expr: LaTeX only, use '$' delimiters.
+- result: Final answer in LaTeX. Use '$\\text{N/A}$' if non-numerical.
+- Minimize step count.
 """
 # Invoke LLM
-print("Invoking LLM for structured hierarchical solution...")
+# print("Invoking LLM for structured hierarchical solution...")
 result: FullProblemOutput = llm.invoke([system_instruction, problem_text])
+print(result)
 
-# ================================================================
-# ======================  FORMATTED PRINT  ========================
-# ================================================================
-print("\n" + "="*50)
-print(f"=== STRUCTURED REASONING RESULT: {result.problem_title} ===")
-print("="*50)
 
-for question in result.questions:
-    print(f"\n## Question {question.question_label}")
-    print("--------------------------------------------------")
+# # ================================================================
+# # ======================  FORMATTED PRINT  ========================
+# # ================================================================
+# print("\n" + "="*50)
+# print(f"=== STRUCTURED REASONING RESULT: {result.title} ===")
+# print("="*50)
+
+# for idx,question in enumerate(result.solutions):
+#     print(f"\n## Question {idx}")
+#     print("--------------------------------------------------")
     
-    print("  Givens:")
-    for given in question.givens:
-        print(f"    - {given}")
-    print(f"  Requested: {question.requested}")
+#     print("  Objective:")
+#     print(question.objective)
     
-    if question.relies_on_questions:
-        print(f"  Relies On: {', '.join(question.relies_on_questions)}")
+#     print(f"  Relies On: {', '.join(question.deps)}")
     
-    print("\n  Strategy Outline (High-Level Plan):")
-    for item in question.strategy_outline:
-        print(f"    - {item}")
         
-    print("\n  Detailed Derivation:")
-    for step in question.steps:
-        print(f"    [{step.step_number}]: **{step.justification}**")
-        print(f"        {step.expression}")
+#     print("\n  Detailed Derivation:")
+#     for num,step in enumerate(question.steps):
+#         print(f"    [{num}]: **{step.action}**")
+#         print(f"        {step.expr}")
         
-    print("\n  Final Answer:")
-    print(f"    {question.final_answer}")
+#     print("\n  Final Answer:")
+#     print(f"    {question.result}")
 
-print("\n" + "="*50)
+# print("\n" + "="*50)
