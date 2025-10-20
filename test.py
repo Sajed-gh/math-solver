@@ -77,44 +77,45 @@ Que peut-on en déduire concernant la nature (convergence et limite) des suites 
 target_language = "French"
 
 # --- REVISED SYSTEM INSTRUCTION (OPTIMIZED FOR CONCISENESS) ---
-system_instruction = """Solve all questions. Follow schema exactly.
+system_instruction = """Solve all questions strictly using logical reasoning.
 
-RULES:
-- Steps: Major logical moves only. Combine simple algebra.
-- action: Cite theorem/rule used. Max 10 words.
-- expr: LaTeX only, use '$' delimiters.
-- result: Final answer in LaTeX. Use '$\\text{N/A}$' if non-numerical.
-- Minimize step count.
+- Focus on major logical moves; combine trivial algebra.
+- Minimize step count while maintaining correctness.
+- Check each inequality, derivative, or limit carefully.
+- Ensure final answers match derivations.
+- Use previous results efficiently (respect dependency relations).
+- Prioritize rigor, clarity, and conciseness in steps.
+- Check final answers for consistency with steps.
+- Always include a 'result' field for each question, even if approximate.
 """
 # Invoke LLM
 # print("Invoking LLM for structured hierarchical solution...")
 result: FullProblemOutput = llm.invoke([system_instruction, problem_text])
-print(result)
 
 
-# # ================================================================
-# # ======================  FORMATTED PRINT  ========================
-# # ================================================================
-# print("\n" + "="*50)
-# print(f"=== STRUCTURED REASONING RESULT: {result.title} ===")
-# print("="*50)
+# ================================================================
+# ======================  FORMATTED PRINT  ========================
+# ================================================================
+print("\n" + "="*50)
+print(f"=== STRUCTURED REASONING RESULT: {result.title} ===")
+print("="*50)
 
-# for idx,question in enumerate(result.solutions):
-#     print(f"\n## Question {idx}")
-#     print("--------------------------------------------------")
+for idx,question in enumerate(result.solutions):
+    print(f"\n## Question {idx}")
+    print("--------------------------------------------------")
     
-#     print("  Objective:")
-#     print(question.objective)
+    print("  Objective:")
+    print(question.objective)
     
-#     print(f"  Relies On: {', '.join(question.deps)}")
+    print(f"  Relies On: {', '.join(question.deps)}")
     
         
-#     print("\n  Detailed Derivation:")
-#     for num,step in enumerate(question.steps):
-#         print(f"    [{num}]: **{step.action}**")
-#         print(f"        {step.expr}")
+    print("\n  Detailed Derivation:")
+    for num,step in enumerate(question.steps):
+        print(f"    [{num}]: **{step.action}**")
+        print(f"        {step.expr}")
         
-#     print("\n  Final Answer:")
-#     print(f"    {question.result}")
+    print("\n  Final Answer:")
+    print(f"    {question.result}")
 
-# print("\n" + "="*50)
+print("\n" + "="*50)
