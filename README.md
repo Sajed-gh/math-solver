@@ -4,7 +4,7 @@
 
 ---
 
-## 🎓 Features
+## Features
 
 - Accepts a wide range of math problems (algebra, calculus, geometry, etc.)  
 - Uses Google Gemini 2.5 to generate detailed, step-by-step solutions  
@@ -13,7 +13,7 @@
 
 ---
 
-## 💡 How It Works
+## How It Works
 
 1. **Input**: Provide a math problem.  
 2. **LLM Processing**: Google Gemini processes the problem.  
